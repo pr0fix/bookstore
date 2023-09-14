@@ -14,7 +14,7 @@ public class Book {
     private Long id;
     private String title;
     private String author;
-    @Column(name = "year_of_release")
+    @Column(name = "publishing_year")
     private int year;
     private String isbn;
     private double price;
