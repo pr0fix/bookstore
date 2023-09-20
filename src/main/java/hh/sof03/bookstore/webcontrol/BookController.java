@@ -16,11 +16,6 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcomepage";
-    }
-
     @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public String listBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
