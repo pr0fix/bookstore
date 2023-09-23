@@ -9,26 +9,44 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof03.bookstore.domain.Book;
 import hh.sof03.bookstore.domain.BookRepository;
+import hh.sof03.bookstore.domain.Category;
+import hh.sof03.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 
-
 	@Bean
-	public CommandLineRunner BookRunner(BookRepository bookRepository) {
+	public CommandLineRunner BookRunner(BookRepository bookRepository, CategoryRepository categoryRepository) {
 		return (args) -> {
-			log.info("save a couple of books");
-			bookRepository.save(new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", 2002, "978-8831000154", 59.95));
-			bookRepository.save(new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997, "978-0747532743", 16.39));
-			log.info("fetch all books");
+			log.info("save a couple of categories");
+			Category category1 = new Category("Fantasy");
+			categoryRepository.save(category1);
+			Category category2 = new Category("Scifi");
+			categoryRepository.save(category2);
+			Category category3 = new Category("Comic");
+			categoryRepository.save(category3);
 
-			};
+			log.info("save a couple of books");
+			bookRepository.save(
+					new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", 2002, "978-8831000154", 59.95));
+			bookRepository.save(new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997,
+					"978-0747532743", 16.39));
+
+			log.info("fetch all categories");
+			for (Category category : categoryRepository.findAll()) {
+				log.info(category.toString());
+			}
+			log.info("fetch all books");
+			for (Book book : bookRepository.findAll()) {
+				log.info(book.toString());
+			}
 
 		};
-}
 
+	};
+}
