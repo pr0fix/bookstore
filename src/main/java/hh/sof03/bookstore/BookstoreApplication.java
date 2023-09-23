@@ -26,9 +26,9 @@ public class BookstoreApplication {
 			log.info("save a couple of categories");
 			Category category1 = new Category("Fantasy");
 			categoryRepository.save(category1);
-			Category category2 = new Category("Scifi");
+			Category category2 = new Category("Mystery");
 			categoryRepository.save(category2);
-			Category category3 = new Category("Comic");
+			Category category3 = new Category("Horror");
 			categoryRepository.save(category3);
 
 			log.info("save a couple of books");

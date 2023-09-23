@@ -9,7 +9,7 @@
 
 <body>
     <h1>Books</h1>
-    <div id="container">
+    <div>
         <table class="table table-striped">
             <tr>
                 <th>Author</th>
@@ -29,7 +29,8 @@
                 <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-danger">Edit</a></td>
             </tr>
         </table>
-        <a href="/add" class="btn btn-success">Add Book</a>
+        <a href="/addbook" class="btn btn-success">Add Book</a>
+        <a href="/categorylist" class="btn btn-primary">Categories</a>
     </div>
 </body>
 
