@@ -28,14 +28,15 @@ public class BookstoreApplication {
 			categoryRepository.save(category1);
 			Category category2 = new Category("Mystery");
 			categoryRepository.save(category2);
-			Category category3 = new Category("Horror");
+			Category category3 = new Category("Fiction");
 			categoryRepository.save(category3);
 
 			log.info("save a couple of books");
 			bookRepository.save(
-					new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", 2002, "978-8831000154", 59.95));
+					new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", 2002, "978-8831000154", 59.95,
+							category3));
 			bookRepository.save(new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997,
-					"978-0747532743", 16.39));
+					"978-0747532743", 16.39, category1));
 
 			log.info("fetch all categories");
 			for (Category category : categoryRepository.findAll()) {
