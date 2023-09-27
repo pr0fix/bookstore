@@ -16,30 +16,35 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
+    // Lists all books in booklist to website
     @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public String listBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
         return "booklist";
     }
 
+    // Adds a new book to booklist
     @RequestMapping(value = "/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         return ("addbook");
     };
 
+    // Saves new book / edited book
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Book book) {
+    public String saveBook(Book book) {
         bookRepository.save(book);
         return "redirect:booklist";
     }
 
+    // Delete existing book in booklist
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         bookRepository.deleteById(bookId);
         return "redirect:../booklist";
     }
 
+    // Edit existing book in booklist
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String showModBook(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute(("book"), bookRepository.findById(bookId));
