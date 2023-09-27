@@ -18,6 +18,10 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public String listBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
