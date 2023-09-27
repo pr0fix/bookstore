@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Book list</title>
+    <title>Edit book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
@@ -11,7 +11,7 @@
     <h1>Edit Book</h1>
     <div>
 
-        <form th:object="${book}" th:action="@{../save}" action="#" method="post">
+        <form th:object="${book}" th:action="@{../savebook}" action="#" method="post">
             <input type="hidden" th:field="*{id}" class="form-control" />
             <input type="text" th:field="*{author}" />
             <input type="text" th:field="*{title}" />
