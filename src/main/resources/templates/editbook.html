@@ -18,8 +18,15 @@
             <input type="text" th:field="*{isbn}" />
             <input type="text" th:field="*{year}" />
             <input type="text" th:field="*{price}" />
+            <select id="categorylist" th:field="*{category}">
+                <option th:each="category : ${categories}"
+                th:value="${category.categoryId}"
+                th:text="${category.name}"></option>
+            </select>
+
             <input type="submit" class="btn btn-success" value="Save"></input>
         </form>
+        <a href="/booklist" class="btn btn-danger">Cancel</a>
 
 
     </div>

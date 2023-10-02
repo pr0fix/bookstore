@@ -23,14 +23,14 @@ public class CategoryController {
     }
 
     // Lists all categories
-    @RequestMapping(value = "categorylist", method = RequestMethod.GET)
+    @RequestMapping(value = "/categorylist", method = RequestMethod.GET)
     public String listCategories(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         return "categorylist";
     }
 
     // Adds a category into categorylist
-    @RequestMapping(value = "/addcategory")
+    @RequestMapping(value = "/addcategory", method = RequestMethod.GET)
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         return ("addcategory");
