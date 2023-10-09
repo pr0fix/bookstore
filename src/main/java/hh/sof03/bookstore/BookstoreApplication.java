@@ -11,6 +11,8 @@ import hh.sof03.bookstore.domain.Book;
 import hh.sof03.bookstore.domain.BookRepository;
 import hh.sof03.bookstore.domain.Category;
 import hh.sof03.bookstore.domain.CategoryRepository;
+import hh.sof03.bookstore.domain.User;
+import hh.sof03.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -21,7 +23,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner BookRunner(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner BookRunner(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 			log.info("save a couple of categories");
 			Category category1 = new Category("Fantasy");
@@ -37,6 +39,15 @@ public class BookstoreApplication {
 							category3));
 			bookRepository.save(new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997,
 					"978-0747532743", 16.39, category1));
+
+			log.info("create a couple of users");
+			User user1 = new User("user", "$2a$10$NJv3yK1GaqZjGeiJXKVE6ewclpHLw1q/PU0tkbA6ASZSRGSo0USHC", "user@bookstore.com", "USER");
+			User user2 = new User("admin", "$2a$10$H5jQf38AHhWNBBQRUu.W4.KM0z8ejD.02wCqmA7f3DRGYmPjps.TC", "admin@bookstore.com", "ADMIN");
+
+			
+			log.info("save users");
+			userRepository.save(user1);
+			userRepository.save(user2);
 
 			log.info("fetch all categories");
 			for (Category category : categoryRepository.findAll()) {

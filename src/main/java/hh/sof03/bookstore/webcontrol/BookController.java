@@ -50,9 +50,9 @@ public class BookController {
         return "redirect:booklist";
     }
 
-    // Deletes a book from booklist using id
+    // Deletes a book from booklist using id only if request comes from "ADMIN"
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         bookRepository.deleteById(bookId);
         return "redirect:../booklist";
@@ -65,13 +65,6 @@ public class BookController {
         model.addAttribute("categories", categoryRepository.findAll());
         return "editbook";
     }
-
-    // Method for creating login-page
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
-    }
-
 
     //REST Service methods:
 
