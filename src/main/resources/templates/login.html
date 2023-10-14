@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Login to bookstore </title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <style>
+        
+        .container {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            padding: auto;
+        }
+        
+        #input_title {
+            display: flex;
+            text-align: start;
+        }
+        h1 {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Please sign in</h1>
+    <div class="container">
+        <div class="alert alert-danger" th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div class="alert alert-warning" th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div id="input_title"><label> Username: <input type="text" name="username" class="form-control"/> </label></div>
+            <div id="input_title"><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
+            <div><input type="submit" value="Sign In" class="btn btn-success"/>
+                <a th:href="@{/signup}" class="btn btn-primary">Sign-up</a>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>

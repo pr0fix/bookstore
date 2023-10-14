@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign-up to bookstore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <style>
+
+        .container {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            padding: auto;
+        }
+        
+        #input_title {
+            display: flex;
+            text-align: start;
+            flex-direction: column;
+        }
+        h1 {
+            display: flex;
+            justify-content: center;
+            text-align: center;  
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sign-up</h1>
+    <div class="container">
+        
+       
+            <form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
+                <div id="input_title">
+                    <label> Username:<input type="text" th:field="*{username}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
+                </div>
+
+                <div id="input_title">
+                    <label> Email:<input type="email" th:field="*{email}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+                </div>
+
+                <div id="input_title">
+                    <label> Password:<input type="password" th:field="*{password}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+                </div>
+
+                <div id="input_title">
+                    <label> Re-type Password: <input type="password" th:field="*{passwordCheck}"
+                            class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error
+                    </p>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Sign-up"></input>
+                <a href="/login" class="btn btn-danger">Back to login</a>
+            </form>
+        
+    </div>
+</body>
+
+</html>
