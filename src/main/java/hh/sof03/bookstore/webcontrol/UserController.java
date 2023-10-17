@@ -15,7 +15,6 @@ import hh.sof03.bookstore.domain.UserRepository;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/webcontrol")
 public class UserController {
 
     @Autowired

@@ -10,7 +10,6 @@ import hh.sof03.bookstore.domain.Category;
 import hh.sof03.bookstore.domain.CategoryRepository;
 
 @Controller
-@RequestMapping("/webcontrol")
 public class CategoryController {
 
     @Autowired

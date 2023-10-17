@@ -20,7 +20,6 @@ import hh.sof03.bookstore.domain.CategoryRepository;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/webcontrol")
 public class BookController {
 
     @Autowired
