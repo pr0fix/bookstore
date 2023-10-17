@@ -24,9 +24,6 @@ class BookstoreApplicationTests {
 	@Autowired
 	private UserController userController;
 
-
-
-
 	@Test
 	public void contextLoads() throws Exception{
 		assertThat(bookController).isNotNull();
