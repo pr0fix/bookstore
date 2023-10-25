@@ -37,7 +37,7 @@ public class UserController {
 
 
     // Saves user signup if all requirements are met
-@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
+@RequestMapping(value = "../saveuser", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
             if(signupForm.getPassword().equals(signupForm.getPasswordCheck())) {
