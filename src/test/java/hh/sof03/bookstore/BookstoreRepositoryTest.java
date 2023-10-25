@@ -41,6 +41,7 @@ public class BookstoreRepositoryTest {
 		Book book = new Book("Harry Potter and the Order of the Phoenix", "J.K. Rowling", 2003, "978-0439567626", 25.00,
 				category);
 		bookRepository.save(book);
+
 		assertThat(book.getId()).isNotNull();
 	}
 
@@ -53,6 +54,7 @@ public class BookstoreRepositoryTest {
 		Long bookId = book.getId();
 		bookRepository.deleteById(bookId);
 		Book deletedBook = bookRepository.findById(bookId).orElse(null);
+
 		assertNull(deletedBook);
 	}
 
@@ -67,8 +69,9 @@ public class BookstoreRepositoryTest {
 
 	// Test for finding all books in database
 	@Test
-	public void getAllBooks() {
+	public void findAllBooks() {
 		Iterable<Book> books = bookRepository.findAll();
+
 		assertThat(books).isNotNull();
 		assertThat(books.iterator().hasNext());
 
@@ -81,6 +84,7 @@ public class BookstoreRepositoryTest {
 	public void createNewCategory() {
 		Category category = new Category("Scifi");
 		categoryRepository.save(category);
+
 		assertThat(category.getCategoryId()).isNotNull();
 	}
 
@@ -89,11 +93,8 @@ public class BookstoreRepositoryTest {
 	public void deleteCategory() {
 		Category category = new Category("Classics");
 		categoryRepository.save(category);
-
 		Long categoryId = category.getCategoryId();
-
 		categoryRepository.deleteById(categoryId);
-
 		Category deletedCategory = categoryRepository.findById(categoryId).orElse(null);
 
 		assertNull(deletedCategory);
@@ -111,7 +112,7 @@ public class BookstoreRepositoryTest {
 
 	// Test for finding all categories from database
 	@Test
-	public void findCategories() {
+	public void findAllCategories() {
 		Iterable<Category> categories = categoryRepository.findAll();
 
 		assertThat(categories).isNotNull();
@@ -127,7 +128,6 @@ public class BookstoreRepositoryTest {
 		String pwd = "password";
 		BCryptPasswordEncoder cryptEncoder = new BCryptPasswordEncoder();
 		String hashPwd = cryptEncoder.encode(pwd);
-
 		User user = new User("newUser", hashPwd, "newUser@gmail.com", "USER");
 		userRepository.save(user);
 
@@ -143,17 +143,15 @@ public class BookstoreRepositoryTest {
 
 		User user = new User("testUser", hashPwd, "testUser@testing.net", "USER");
 		userRepository.save(user);
-
 		Long userId = user.getId();
-
 		userRepository.deleteById(userId);
-
 		User deletedUser = userRepository.findById(userId).orElse(null);
 
 		assertNull(deletedUser);
 	}
 
 	// Test for finding a user by username from database
+	// and testing for non-existent cases
 	@Test
 	public void findUserByName() {
 		User user = userRepository.findByUsername("user");
@@ -164,14 +162,30 @@ public class BookstoreRepositoryTest {
 		assertThat(nonExistentUser).isNull();
 	}
 
+	// Test for finding a user by email from database
+	// and testing for non-existent cases
+	@Test
+	public void findUserByEmail() {
+		User user = userRepository.findByEmail("user@bookstore.com");
+		User nonExistentUser = userRepository.findByEmail("nonExistentUser@bookstore.com");
+		User userWithNullEmail = userRepository.findByEmail(null);
+
+		assertThat(user).isNotNull();
+		assertThat(user.getEmail()).isEqualTo("user@bookstore.com");
+		assertThat(user.getRole()).isEqualTo("USER");
+		assertThat(nonExistentUser).isNull();
+		assertThat(userWithNullEmail).isNull();
+
+	}
+
 	// Test to find all users from database
 	@Test
-	public void findUsers() {
+	public void findAllUsers() {
 		Iterable<User> users = userRepository.findAll();
 
 		assertThat(users).isNotNull();
 		assertThat(users.iterator().hasNext());
 		assertThat(users).isNotEmpty();
 	}
-	
+
 }
