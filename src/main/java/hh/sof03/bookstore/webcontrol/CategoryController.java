@@ -16,21 +16,21 @@ public class CategoryController {
     CategoryRepository categoryRepository;
 
     // Saves added category
-    @RequestMapping(value = "../savecategory", method = RequestMethod.POST)
+    @RequestMapping(value = "/savecategory", method = RequestMethod.POST)
     public String saveCategory(Category category) {
         categoryRepository.save(category);
         return "redirect:categorylist";
     }
 
     // Lists all categories
-    @RequestMapping(value = "../categorylist", method = RequestMethod.GET)
+    @RequestMapping(value = "/categorylist", method = RequestMethod.GET)
     public String listCategories(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         return "categorylist";
     }
 
     // Adds a category into categorylist
-    @RequestMapping(value = "../addcategory", method = RequestMethod.GET)
+    @RequestMapping(value = "/addcategory", method = RequestMethod.GET)
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         return ("addcategory");

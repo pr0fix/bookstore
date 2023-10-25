@@ -29,14 +29,14 @@ public class BookController {
     CategoryRepository categoryRepository;
 
     // Lists all the books in booklist
-    @RequestMapping(value = "../booklist", method = RequestMethod.GET)
+    @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public String listBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
         return "booklist";
     }
 
     // Adds a book into booklist
-    @RequestMapping(value = "../addbook")
+    @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -44,14 +44,14 @@ public class BookController {
     };
 
     // Saves added/edited book in booklist
-    @RequestMapping(value = "../savebook", method = RequestMethod.POST)
+    @RequestMapping(value = "/savebook", method = RequestMethod.POST)
     public String saveBook(Book book) {
         bookRepository.save(book);
         return "redirect:booklist";
     }
 
     // Deletes a book from booklist using id only if request comes from "ADMIN"
-    @RequestMapping(value = "../delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         bookRepository.deleteById(bookId);
@@ -59,7 +59,7 @@ public class BookController {
     }
 
     // Edits a book in booklist using id
-    @RequestMapping(value = "../edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String showModBook(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute(("book"), bookRepository.findById(bookId));
         model.addAttribute("categories", categoryRepository.findAll());
